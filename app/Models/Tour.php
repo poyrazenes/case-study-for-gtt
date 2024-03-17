@@ -16,4 +16,8 @@ class Tour extends Model
         'starts_at',
         'ends_at',
     ];
+
+    protected $dates = [
+        'starts_at', 'ends_at'
+    ];
 }
