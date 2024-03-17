@@ -192,7 +192,7 @@ paths:
       parameters:
         - name: "id"
           in: "path"
-          description: "Member ID that fetched from 'family-members' service"
+          description: "Tour ID"
           required: true
           type: "integer"
         - name: "name"
