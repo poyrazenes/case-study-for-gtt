@@ -1,0 +1,159 @@
+swagger: "2.0"
+info:
+  description: "This is the first version mobile api documentation. You can find out more about Swagger at [http://swagger.io](http://swagger.io)."
+  version: "1.0.5"
+  title: "GTT"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+basePath: "/api/mobile/v1"
+tags:
+  - name: "auth"
+    description: "Authentication operations"
+  - name: "tour"
+    description: "Tour operations"
+schemes:
+  - "https"
+  - "http"
+parameters:
+  HeaderAppVersion:
+    name: "appversion"
+    type: string
+    in: header
+    required: false
+  HeaderDeviceOs:
+    name: "deviceos"
+    type: string
+    in: header
+    required: false
+paths:
+  /auth/login:
+    post:
+      tags:
+        - "auth"
+      summary: "Logs users into the system"
+      description: ""
+      operationId: "login"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "email"
+          in: "formData"
+          description: "User email"
+          required: true
+          type: "string"
+        - name: "password"
+          in: "formData"
+          description: "User password"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            "$ref": "#/definitions/ApiResponse"
+  /auth/register:
+    post:
+      tags:
+        - "auth"
+      summary: "Register users into the system"
+      description: ""
+      operationId: "register"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "language"
+          in: "formData"
+          description: "language(en, es)"
+          required: true
+          type: "string"
+        - name: "country_id"
+          in: "formData"
+          description: "Country ID"
+          required: true
+          type: "integer"
+        - name: "state_id"
+          in: "formData"
+          description: "State ID"
+          required: false
+          type: "integer"
+        - name: "city_id"
+          in: "formData"
+          description: "City ID"
+          required: true
+          type: "integer"
+        - name: "remote_id"
+          in: "formData"
+          description: "Remote ID"
+          required: true
+          type: "string"
+        - name: "postal_code"
+          in: "formData"
+          description: "Zip Code"
+          required: false
+          type: "string"
+        - name: "first_name"
+          in: "formData"
+          description: "User first name"
+          required: true
+          type: "string"
+        - name: "last_name"
+          in: "formData"
+          description: "User last name"
+          required: true
+          type: "string"
+        - name: "email"
+          in: "formData"
+          description: "User email"
+          required: true
+          type: "string"
+        - name: "password"
+          in: "formData"
+          description: "User password"
+          required: true
+          type: "string"
+        - name: "password_confirmation"
+          in: "formData"
+          description: "User password(Again)"
+          required: true
+          type: "string"
+        - name: "referral_code"
+          in: "formData"
+          description: "Referral code"
+          required: false
+          type: "string"
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            "$ref": "#/definitions/ApiResponse"
+definitions:
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      status:
+        type: "boolean"
+      message:
+        type: "string"
+      data:
+        type: "object"
+      meta:
+        type: "object"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "https://swagger.io"
+securityDefinitions:
+  JWT:
+    type: "apiKey"
+    in: "header"
+    name: "Authorization"
