@@ -13,7 +13,16 @@ class TourController extends ApiBaseController
     {
         $take = 20;
 
-        $rows = Tour::paginate($take);
+        $user_id = (int)request()->query('user_id');
+
+        $query = Tour::query();
+
+        if (!empty($user_id)) {
+            $query->where('user_id', $user_id);
+        }
+
+        $rows = $query->paginate($take);
+
 
         $meta = [
             'page' => (int)request()->input('page', 1),
