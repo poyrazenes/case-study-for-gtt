@@ -57,6 +57,10 @@ paths:
           description: "successful operation"
           schema:
             "$ref": "#/definitions/ApiResponse"
+        "401":
+          description: "failed operation"
+          schema:
+            "$ref": "#/definitions/ApiResponse"
   /auth/register:
     post:
       tags:
@@ -92,6 +96,10 @@ paths:
       responses:
         "201":
           description: "successful operation"
+          schema:
+            "$ref": "#/definitions/ApiResponse"
+        "422":
+          description: "unprocessable entity"
           schema:
             "$ref": "#/definitions/ApiResponse"
   /tours:
@@ -166,6 +174,10 @@ paths:
           description: "successful operation"
           schema:
             "$ref": "#/definitions/ApiResponse"
+        "422":
+          description: "unprocessable entity"
+          schema:
+            "$ref": "#/definitions/ApiResponse"
   /tours/{id}:
     put:
       tags:
@@ -211,8 +223,16 @@ paths:
       security:
         - JWT: []
       responses:
-        "202":
+        "204":
           description: "successful operation"
+          schema:
+            "$ref": "#/definitions/ApiResponse"
+        "404":
+          description: "not found"
+          schema:
+            "$ref": "#/definitions/ApiResponse"
+        "422":
+          description: "unprocessable entity"
           schema:
             "$ref": "#/definitions/ApiResponse"
     delete:
@@ -234,6 +254,10 @@ paths:
       responses:
         "204":
           description: "successful operation"
+          schema:
+            "$ref": "#/definitions/ApiResponse"
+        "404":
+          description: "not found"
           schema:
             "$ref": "#/definitions/ApiResponse"
 definitions:
