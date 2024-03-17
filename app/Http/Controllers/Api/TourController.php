@@ -47,7 +47,8 @@ class TourController extends ApiBaseController
     {
         $data = $request->validated();
 
-        $row = Tour::find($id);
+        $row = Tour::where('user_id', auth()->id())
+            ->where('id', $id)->first();
 
         if (!$row) {
             return $this->response
@@ -68,7 +69,8 @@ class TourController extends ApiBaseController
 
     public function destroy($id)
     {
-        $row = Tour::find($id);
+        $row = Tour::where('user_id', auth()->id())
+            ->where('id', $id)->first();
 
         if (!$row) {
             return $this->response
