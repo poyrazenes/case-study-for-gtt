@@ -22,5 +22,7 @@ Route::name('api.mobile.v1.')->prefix('mobile/v1')->group(function () {
         Route::post('/register', 'Api\AuthController@register');
     });
 
-    Route::apiResource('/tours', 'Api\TourController');
+    Route::middleware(['check.api_auth'])->group(function () {
+        Route::apiResource('/tours', 'Api\TourController');
+    });
 });
