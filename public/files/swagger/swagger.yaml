@@ -227,8 +227,8 @@ paths:
           description: "successful operation"
           schema:
             "$ref": "#/definitions/ApiResponse"
-        "404":
-          description: "not found"
+        "403":
+          description: "forbidden"
           schema:
             "$ref": "#/definitions/ApiResponse"
         "422":
@@ -256,8 +256,8 @@ paths:
           description: "successful operation"
           schema:
             "$ref": "#/definitions/ApiResponse"
-        "404":
-          description: "not found"
+        "403":
+          description: "forbidden"
           schema:
             "$ref": "#/definitions/ApiResponse"
 definitions:
