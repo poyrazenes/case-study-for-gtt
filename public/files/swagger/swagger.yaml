@@ -161,6 +161,76 @@ paths:
           description: "successful operation"
           schema:
             "$ref": "#/definitions/ApiResponse"
+  /tours/{id}:
+    put:
+      tags:
+        - "tour"
+      summary: "Update tour"
+      description: ""
+      operationId: "tours-update"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Member ID that fetched from 'family-members' service"
+          required: true
+          type: "integer"
+        - name: "name"
+          in: "formData"
+          description: "Tour name"
+          required: true
+          type: "string"
+        - name: "description"
+          in: "formData"
+          description: "Tour description"
+          required: true
+          type: "string"
+        - name: "location"
+          in: "formData"
+          description: "Tour location"
+          required: true
+          type: "string"
+        - name: "starts_at"
+          in: "formData"
+          description: "Tour start date(YYYY-MM-DD H:i:s)"
+          required: true
+          type: "string"
+        - name: "ends_at"
+          in: "formData"
+          description: "Tour end date(YYYY-MM-DD H:i:s)"
+          required: true
+          type: "string"
+      security:
+        - JWT: []
+      responses:
+        "202":
+          description: "successful operation"
+          schema:
+            "$ref": "#/definitions/ApiResponse"
+    delete:
+      tags:
+        - "tour"
+      summary: "Delete tour"
+      description: ""
+      operationId: "tour-destroy"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Tour ID"
+          required: true
+          type: "integer"
+      security:
+        - JWT: []
+      responses:
+        "204":
+          description: "successful operation"
+          schema:
+            "$ref": "#/definitions/ApiResponse"
 definitions:
   ApiResponse:
     type: "object"

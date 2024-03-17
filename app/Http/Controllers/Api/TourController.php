@@ -57,7 +57,7 @@ class TourController extends ApiBaseController
         $row->update($data);
 
         return $this->response
-            ->setCode(202)
+            ->setCode(204)
             ->setStatus(true)
             ->setMessage('Operation was successful!')
             ->respond();
