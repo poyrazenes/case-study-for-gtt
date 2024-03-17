@@ -23,6 +23,7 @@ class TourFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => 1,
             'name' => 'Test tour name',
             'description' => 'Test tour description',
             'location' => 'Test location',

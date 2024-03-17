@@ -10,6 +10,7 @@ class Tour extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'name',
         'description',
         'location',
@@ -20,4 +21,9 @@ class Tour extends Model
     protected $dates = [
         'starts_at', 'ends_at'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

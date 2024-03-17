@@ -13,12 +13,16 @@ return new class extends Migration
     {
         Schema::create('tours', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
             $table->string('name');
             $table->string('description');
             $table->string('location');
             $table->timestamp('starts_at');
             $table->timestamp('ends_at');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')
+                ->on('users')->cascadeOnDelete();
         });
     }
 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Tour;
 
 use App\Http\Requests\Api\TourRequest;
-use App\Http\Resources\Api\TourListCollection;
+use App\Http\Resources\Api\TourResource;
 
 class TourController extends ApiBaseController
 {
@@ -24,14 +24,17 @@ class TourController extends ApiBaseController
         return $this->response->setCode(200)
             ->setStatus(true)
             ->setMessage('Operation was successful!')
-            ->setData(TourListCollection::collection($rows))
+            ->setData(TourResource::collection($rows))
             ->setMeta($meta)
             ->respond();
     }
 
     public function store(TourRequest $request)
     {
-        Tour::create($request->validated());
+        $data = $request->validated();
+        $data['user_id'] = auth()->id();
+
+        Tour::create($data);
 
         return $this->response
             ->setCode(201)
