@@ -12,8 +12,6 @@ class AuthController extends ApiBaseController
     public function login(LoginRequest $request)
     {
         $data = $request->validated();
-        $data['status'] = true;
-        $data['is_deleted'] = false;
 
         if (!$token = auth('api')->attempt($data)) {
             return $this->response
@@ -23,11 +21,7 @@ class AuthController extends ApiBaseController
                 ->respond();
         }
 
-        return $this->response->setCode(200)
-            ->setStatus(true)
-            ->setMessage('Operation was successful!')
-            ->setData(['token' => $token])
-            ->respond();
+        return $this->tokenResponse($token);
     }
 
     public function register(RegisterRequest $request)
@@ -41,10 +35,16 @@ class AuthController extends ApiBaseController
             'password' => $request->input('password')
         ]);
 
-        return $this->response->setCode(200)
+        return $this->tokenResponse($token);
+    }
+
+    private function tokenResponse($token)
+    {
+        return $this->response
+            ->setCode(200)
             ->setStatus(true)
-            ->setMessage('Operation was successful!')
             ->setData(['token' => $token])
+            ->setMessage('Operation was successful!')
             ->respond();
     }
 }
