@@ -56,14 +56,21 @@ class TourController extends ApiBaseController
     {
         $data = $request->validated();
 
-        $row = Tour::where('user_id', auth()->id())
-            ->where('id', $id)->first();
+        $row = Tour::where('id', $id)->first();
 
         if (!$row) {
             return $this->response
                 ->setCode(404)
                 ->setStatus(false)
                 ->setMessage('Not Found!')
+                ->respond();
+        }
+
+        if ($row->user_id !== auth()->id()) {
+            return $this->response
+                ->setCode(403)
+                ->setStatus(false)
+                ->setMessage('Forbidden!')
                 ->respond();
         }
 
@@ -78,14 +85,21 @@ class TourController extends ApiBaseController
 
     public function destroy($id)
     {
-        $row = Tour::where('user_id', auth()->id())
-            ->where('id', $id)->first();
+        $row = Tour::where('id', $id)->first();
 
         if (!$row) {
             return $this->response
                 ->setCode(404)
                 ->setStatus(false)
                 ->setMessage('Not Found!')
+                ->respond();
+        }
+
+        if ($row->user_id !== auth()->id()) {
+            return $this->response
+                ->setCode(403)
+                ->setStatus(false)
+                ->setMessage('Forbidden!')
                 ->respond();
         }
 
